@@ -2,10 +2,12 @@
 <body>
   <div id="container">
     <div id="wrap">
-      <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
+      <% if (page.layout !== 'simple') {%>
+        <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
+      <% } %>
       <div class="outer">
-        <section id="main"><%- body %></section>
-        <% if (theme.sidebar && theme.sidebar !== 'bottom'){ %>
+        <section id="main" data-type="<%= page.layout %>"><%- body %></section>
+        <% if (theme.sidebar && theme.sidebar !== 'bottom' && page.layout !== 'simple'){ %>
           <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
         <% } %>
       </div>
